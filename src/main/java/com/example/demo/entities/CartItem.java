@@ -5,33 +5,38 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="cart_items")
+@Table(name = "cart_items")
 public class CartItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cart_item_id")
+    @Column(name = "cart_item_id")
     private Long id;
 
-    @Column(name="vacation_id")
+    @ManyToOne
+    @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart_item")
-    private Set<Excursion> excursions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartItem")
+    private Set<Excursion> excursions = new HashSet<>();
 
-    @Column(name="cart_id")
     @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @Column(name="create_date")
     @CreationTimestamp
-    private Date create_date;
+    @Column(name = "create_date")
+    private Date createDate;
 
-    @Column(name="last_update")
     @UpdateTimestamp
-    private Date last_update;
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -64,19 +69,19 @@ public class CartItem {
         this.cart = cart;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

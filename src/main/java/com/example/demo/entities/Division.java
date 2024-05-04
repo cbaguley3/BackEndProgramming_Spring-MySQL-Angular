@@ -5,35 +5,35 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="divisions")
 public class Division {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="division_id")
     private Long id;
 
     @Column(name="division")
-    private String division_name;
+    private String name; // Changed variable name to match SQL column name
 
     @Column(name="create_date")
     @CreationTimestamp
-    private Date create_date;
+    private Date createDate;
 
     @Column(name="last_update")
     @UpdateTimestamp
-    private Date last_update;
+    private Date lastUpdate;
 
-    @Column(name="country")
     @ManyToOne
+    @JoinColumn(name="country_id") // Assuming a division belongs to one country
     private Country country;
 
-    @Column(name="country_id")
-    private Long country_id;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
-    private Set<Customer> customers;
+    private Set<Customer> customers = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -43,28 +43,28 @@ public class Division {
         this.id = id;
     }
 
-    public String getDivision_name() {
-        return division_name;
+    public String getName() {
+        return name;
     }
 
-    public void setDivision_name(String division_name) {
-        this.division_name = division_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     public Country getCountry() {
@@ -73,14 +73,6 @@ public class Division {
 
     public void setCountry(Country country) {
         this.country = country;
-    }
-
-    public Long getCountry_id() {
-        return country_id;
-    }
-
-    public void setCountry_id(Long country_id) {
-        this.country_id = country_id;
     }
 
     public Set<Customer> getCustomers() {

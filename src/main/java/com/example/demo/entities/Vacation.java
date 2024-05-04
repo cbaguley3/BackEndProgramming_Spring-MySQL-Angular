@@ -3,41 +3,43 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedBy;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="vacations")
 public class Vacation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vacation_id")
     private Long id;
 
     @Column(name="vacation_title")
-    private String vacation_title;
+    private String vacationTitle; // Corrected variable name
 
     @Column(name="description")
     private String description;
 
     @Column(name="travel_fare_price")
-    private BigDecimal travel_price;
+    private BigDecimal travelPrice;
 
     @Column(name="image_url")
-    private String image_URL;
-
-    @Column(name="create_date")
+    private String imageURL;
     @CreationTimestamp
-    private Date create_date;
+    @Column(name="create_date")
+    private Date createDate;
 
-    @Column(name="last_update")
     @UpdateTimestamp
-    private Date last_update;
+    @Column(name="last_update")
+    private Date lastUpdate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
     private Set<Excursion> excursions;
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -47,12 +49,12 @@ public class Vacation {
         this.id = id;
     }
 
-    public String getVacation_title() {
-        return vacation_title;
+    public String getVacationTitle() {
+        return vacationTitle;
     }
 
-    public void setVacation_title(String vacation_title) {
-        this.vacation_title = vacation_title;
+    public void setVacationTitle(String vacationTitle) {
+        this.vacationTitle = vacationTitle;
     }
 
     public String getDescription() {
@@ -63,36 +65,36 @@ public class Vacation {
         this.description = description;
     }
 
-    public BigDecimal getTravel_price() {
-        return travel_price;
+    public BigDecimal getTravelPrice() {
+        return travelPrice;
     }
 
-    public void setTravel_price(BigDecimal travel_price) {
-        this.travel_price = travel_price;
+    public void setTravelPrice(BigDecimal travelPrice) {
+        this.travelPrice = travelPrice;
     }
 
-    public String getImage_URL() {
-        return image_URL;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImage_URL(String image_URL) {
-        this.image_URL = image_URL;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     public Set<Excursion> getExcursions() {

@@ -6,10 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="carts")
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="cart_id")
@@ -25,6 +28,7 @@ public class Cart {
     private int party_size;
 
     @Column(name="status")
+    @Enumerated(EnumType.STRING)
     private StatusType status;
 
     @Column(name="create_date")
@@ -35,18 +39,14 @@ public class Cart {
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name="customer")
     @ManyToOne
+    @JoinColumn(name="customer_id")
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
-    private Set<CartItem> cartItem;
+    private Set<CartItem> cartItems = new HashSet<>();
 
-    @Column(name="status")
-    @Enumerated(value = EnumType.STRING)
-    private enum StatusType{
-        pending, ordered, canceled
-    };
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -112,11 +112,16 @@ public class Cart {
         this.customer = customer;
     }
 
-    public Set<CartItem> getCartItem() {
-        return cartItem;
+    public Set<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setCartItem(Set<CartItem> cartItem) {
-        this.cartItem = cartItem;
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    // Enum declaration
+    public enum StatusType {
+        pending, ordered, canceled
     }
 }
