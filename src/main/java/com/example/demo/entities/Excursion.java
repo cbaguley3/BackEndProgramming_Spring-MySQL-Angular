@@ -1,6 +1,10 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,6 +14,10 @@ import java.util.Set;
 
 @Entity
 @Table(name="excursions")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Excursion {
 
     @Id
@@ -18,21 +26,21 @@ public class Excursion {
     private Long id;
 
     @Column(name="excursion_title")
-    private String excursionTitle;
+    private String excursion_title;
 
     @Column(name="excursion_price")
-    private BigDecimal excursionPrice;
+    private BigDecimal excursion_price;
 
     @Column(name="image_url")
-    private String imageURL;
+    private String image_URL;
 
     @CreationTimestamp
     @Column(name="create_date")
-    private Date createDate;
+    private Date create_date;
 
     @UpdateTimestamp
     @Column(name="last_update")
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne
     @JoinColumn(name="vacation_id")
@@ -41,70 +49,4 @@ public class Excursion {
     @ManyToMany(mappedBy = "excursions")
     private Set<CartItem> cartItems;
 
-    // Getters and setters
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getExcursionTitle() {
-        return excursionTitle;
-    }
-
-    public void setExcursionTitle(String excursionTitle) {
-        this.excursionTitle = excursionTitle;
-    }
-
-    public BigDecimal getExcursionPrice() {
-        return excursionPrice;
-    }
-
-    public void setExcursionPrice(BigDecimal excursionPrice) {
-        this.excursionPrice = excursionPrice;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
-    public Set<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(Set<CartItem> cartItems) {
-        this.cartItems = cartItems;
-    }
 }
