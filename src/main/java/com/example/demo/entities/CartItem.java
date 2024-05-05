@@ -2,6 +2,10 @@ package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +15,10 @@ import java.util.Set;
 
 @Entity
 @Table(name="cart_items")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,53 +49,4 @@ public class CartItem {
     @Column(name="last_update")
     private Date last_update;
 
-    // Getters and setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
-    public Set<Excursion> getExcursions() {
-        return excursions;
-    }
-
-    public void setExcursions(Set<Excursion> excursions) {
-        this.excursions = excursions;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Date getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
-    }
-
-    public Date getLast_update() {
-        return last_update;
-    }
-
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
-    }
 }
