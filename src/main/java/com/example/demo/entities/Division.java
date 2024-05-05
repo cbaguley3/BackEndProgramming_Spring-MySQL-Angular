@@ -1,39 +1,44 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="divisions")
 public class Division {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="division_id")
     private Long id;
 
     @Column(name="division")
-    private String name; // Changed variable name to match SQL column name
+    @JsonProperty("division_name")
+    private String division_name;
 
     @Column(name="create_date")
     @CreationTimestamp
-    private Date createDate;
+    private Date create_date;
 
     @Column(name="last_update")
     @UpdateTimestamp
-    private Date lastUpdate;
+    private Date last_update;
+
 
     @ManyToOne
-    @JoinColumn(name="country_id") // Assuming a division belongs to one country
+    @JoinColumn(name = "country_id", insertable = false, updatable = false)
     private Country country;
 
+    @Column(name="country_id")
+    private Long country_id;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
-    private Set<Customer> customers = new HashSet<>();
+    @JsonProperty("customers")
+    private Set<Customer> customers;
 
     public Long getId() {
         return id;
@@ -43,28 +48,28 @@ public class Division {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDivision_name() {
+        return division_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDivision_name(String division_name) {
+        this.division_name = division_name;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public Date getLast_update() {
+        return last_update;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLast_update(Date last_update) {
+        this.last_update = last_update;
     }
 
     public Country getCountry() {
@@ -74,6 +79,7 @@ public class Division {
     public void setCountry(Country country) {
         this.country = country;
     }
+
 
     public Set<Customer> getCustomers() {
         return customers;

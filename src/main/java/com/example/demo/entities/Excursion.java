@@ -18,27 +18,30 @@ public class Excursion {
     private Long id;
 
     @Column(name="excursion_title")
-    private String excursionTitle;
+    private String excursion_title;
 
     @Column(name="excursion_price")
-    private BigDecimal excursionPrice;
+    private BigDecimal excursion_price;
 
     @Column(name="image_url")
-    private String imageURL;
+    private String image_URL;
 
     @CreationTimestamp
     @Column(name="create_date")
-    private Date createDate;
+    private Date create_date;
 
     @UpdateTimestamp
     @Column(name="last_update")
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne
     @JoinColumn(name="vacation_id")
     private Vacation vacation;
 
-    @ManyToMany(mappedBy = "excursions")
+    @ManyToMany
+    @JoinTable(name = "excursion_cart_items",
+            joinColumns = @JoinColumn(name = "excursion_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
     private Set<CartItem> cartItems;
 
     // Getters and setters
@@ -52,44 +55,44 @@ public class Excursion {
         this.id = id;
     }
 
-    public String getExcursionTitle() {
-        return excursionTitle;
+    public String getExcursion_title() {
+        return excursion_title;
     }
 
-    public void setExcursionTitle(String excursionTitle) {
-        this.excursionTitle = excursionTitle;
+    public void setExcursion_title(String excursion_title) {
+        this.excursion_title = excursion_title;
     }
 
-    public BigDecimal getExcursionPrice() {
-        return excursionPrice;
+    public BigDecimal getExcursion_price() {
+        return excursion_price;
     }
 
-    public void setExcursionPrice(BigDecimal excursionPrice) {
-        this.excursionPrice = excursionPrice;
+    public void setExcursion_price(BigDecimal excursion_price) {
+        this.excursion_price = excursion_price;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage_URL() {
+        return image_URL;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImage_URL(String image_URL) {
+        this.image_URL = image_URL;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public Date getLast_update() {
+        return last_update;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLast_update(Date last_update) {
+        this.last_update = last_update;
     }
 
     public Vacation getVacation() {

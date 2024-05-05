@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,34 +12,36 @@ import java.util.Set;
 @Entity
 @Table(name="customers")
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Long id;
 
     @Column(name = "customer_first_name")
+    @JsonProperty("firstName")
     private String firstName;
 
     @Column(name = "customer_last_name")
+    @JsonProperty("lastName")
     private String lastName;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "postal_code")
-    private String postalCode;
+    @JsonProperty("postal_code")
+    private String postal_code;
 
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "create_date")
     @CreationTimestamp
-    private Date createDate;
+    private Date create_date;
 
     @Column(name = "last_update")
     @UpdateTimestamp
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne
     @JoinColumn(name = "division_id") // Assuming a customer belongs to one division
@@ -79,12 +82,12 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public String getPostal_code() {
+        return postal_code;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public void setPostal_code(String postal_code) {
+        this.postal_code = postal_code;
     }
 
     public String getPhone() {
@@ -95,20 +98,20 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public Date getLast_update() {
+        return last_update;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLast_update(Date last_update) {
+        this.last_update = last_update;
     }
 
     public Division getDivision() {

@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,7 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name="carts")
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="cart_id")
@@ -44,9 +44,28 @@ public class Cart {
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
+    @JsonProperty("cartItems")
     private Set<CartItem> cartItems = new HashSet<>();
 
+    // Enum declaration
+    public enum StatusType {
+        PENDING("pending"),
+        ORDERED("ordered"),
+        CANCELED("canceled");
+
+        private final String value;
+
+        StatusType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
+
     // Getters and setters
+
 
     public Long getId() {
         return id;
@@ -118,10 +137,5 @@ public class Cart {
 
     public void setCartItems(Set<CartItem> cartItems) {
         this.cartItems = cartItems;
-    }
-
-    // Enum declaration
-    public enum StatusType {
-        pending, ordered, canceled
     }
 }

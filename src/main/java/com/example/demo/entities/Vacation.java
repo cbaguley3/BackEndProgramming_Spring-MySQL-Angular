@@ -18,23 +18,23 @@ public class Vacation {
     private Long id;
 
     @Column(name="vacation_title")
-    private String vacationTitle; // Corrected variable name
+    private String vacation_title;
 
     @Column(name="description")
     private String description;
 
     @Column(name="travel_fare_price")
-    private BigDecimal travelPrice;
+    private BigDecimal travel_price;
 
     @Column(name="image_url")
-    private String imageURL;
+    private String image_URL;
     @CreationTimestamp
     @Column(name="create_date")
-    private Date createDate;
+    private Date create_date;
 
     @UpdateTimestamp
     @Column(name="last_update")
-    private Date lastUpdate;
+    private Date last_update;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
     private Set<Excursion> excursions;
@@ -49,12 +49,12 @@ public class Vacation {
         this.id = id;
     }
 
-    public String getVacationTitle() {
-        return vacationTitle;
+    public String getVacation_title() {
+        return vacation_title;
     }
 
-    public void setVacationTitle(String vacationTitle) {
-        this.vacationTitle = vacationTitle;
+    public void setVacation_title(String vacation_title) {
+        this.vacation_title = vacation_title;
     }
 
     public String getDescription() {
@@ -65,36 +65,36 @@ public class Vacation {
         this.description = description;
     }
 
-    public BigDecimal getTravelPrice() {
-        return travelPrice;
+    public BigDecimal getTravel_price() {
+        return travel_price;
     }
 
-    public void setTravelPrice(BigDecimal travelPrice) {
-        this.travelPrice = travelPrice;
+    public void setTravel_price(BigDecimal travel_price) {
+        this.travel_price = travel_price;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage_URL() {
+        return image_URL;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImage_URL(String image_URL) {
+        this.image_URL = image_URL;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public Date getLast_update() {
+        return last_update;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLast_update(Date last_update) {
+        this.last_update = last_update;
     }
 
     public Set<Excursion> getExcursions() {
