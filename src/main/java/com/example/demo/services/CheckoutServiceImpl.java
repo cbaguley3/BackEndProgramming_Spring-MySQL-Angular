@@ -41,6 +41,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
 
+
         // populate cart with cartItems
         Set<CartItem> cartItems = purchase.getCartItems();
         cartItems.forEach(item -> cart.add(item));
