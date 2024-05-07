@@ -4,7 +4,6 @@ import com.example.demo.dao.CartRepository;
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.dto.Purchase;
 import com.example.demo.dto.PurchaseResponse;
-import com.example.demo.entities.Cart.StatusType;
 import com.example.demo.entities.Cart;
 import com.example.demo.entities.CartItem;
 import com.example.demo.entities.Customer;
@@ -15,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.UUID;
+
+import static com.example.demo.entities.Cart.StatusType.ordered;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
@@ -34,7 +35,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         Cart cart = purchase.getCart();
         // set status type to "ordered"
-        cart.setStatus(StatusType.ORDERED);
+        cart.setStatus(ordered);
 
         // generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
@@ -44,9 +45,18 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         // populate cart with cartItems
         Set<CartItem> cartItems = purchase.getCartItems();
-        cartItems.forEach(item -> cart.add(item));
+        cartItems.forEach(cartItem -> cartItem.setCart(cart));
 
+        /*  cartItems.forEach(item -> {
+            cart.add(item);
+            item.setCart(cart);
+            item.getExcursions().forEach(excursion -> {
+                excursion.setVacation(item.getVacation());
+                excursion.getCartItems().add(item);
+            });
+        });
 
+    */
         // populate customer with cart
         Customer customer = purchase.getCustomer();
         customer.add(cart);
@@ -55,6 +65,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         // save to database
         customerRepository.save(customer);
         cartRepository.save(cart);
+
 
         return new PurchaseResponse(orderTrackingNumber);
     }

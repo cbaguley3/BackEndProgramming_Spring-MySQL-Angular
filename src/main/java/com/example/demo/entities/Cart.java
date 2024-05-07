@@ -15,15 +15,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="carts")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name="carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
+    @Column(name = "cart_id", nullable = false)
     private Long id;
 
     @Column(name = "order_tracking_number")
@@ -67,20 +67,8 @@ public class Cart {
 
     // Enum declaration
     public enum StatusType {
-        PENDING("pending"),
-        ORDERED("ordered"),
-        CANCELED("canceled");
-
-
-        private final String value;
-
-        StatusType(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
+        pending,
+        ordered,
+        canceled
     }
-
-}
+    }

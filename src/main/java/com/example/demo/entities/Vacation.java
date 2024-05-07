@@ -10,14 +10,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name="vacations")
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name="vacations")
 public class Vacation {
 
     @Id
@@ -44,7 +46,7 @@ public class Vacation {
     @Column(name="last_update")
     private Date last_update;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
-    private Set<Excursion> excursions;
+    @OneToMany(mappedBy = "vacation")
+    private Set<Excursion> excursions = new HashSet<>();
 
 }
