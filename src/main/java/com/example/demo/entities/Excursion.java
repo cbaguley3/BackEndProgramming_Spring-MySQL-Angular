@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -46,7 +47,12 @@ public class Excursion {
     @JoinColumn(name="vacation_id")
     private Vacation vacation;
 
-    @ManyToMany(mappedBy = "excursions")
-    private Set<CartItem> cartItems;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "excursion_cartitem", // Name of the join table
+            joinColumns = @JoinColumn(name = "cart_item_id"), // Foreign key column in the join table
+            inverseJoinColumns = @JoinColumn(name = "excursion_id") // Foreign key column in the other entity's table
+    )
+    private Set<CartItem> cartitems = new HashSet<>();
 
 }

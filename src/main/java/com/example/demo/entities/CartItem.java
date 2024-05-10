@@ -29,11 +29,11 @@ public class CartItem {
     @JoinColumn(name="vacation_id")
     private Vacation vacation;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "excursion_cart_items", // Name of the join table
-            joinColumns = @JoinColumn(name = "cart_item_id"), // Foreign key column in the join table
-            inverseJoinColumns = @JoinColumn(name = "excursion_id") // Foreign key column in the other entity's table
+            name = "excursion_cartitem", // Name of the join table
+            joinColumns = @JoinColumn(name = "excursion_id"), // Foreign key column in the join table
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id") // Foreign key column in the other entity's table
     )
     private Set<Excursion> excursions = new HashSet<>();
 

@@ -47,19 +47,23 @@ public class CheckoutServiceImpl implements CheckoutService {
         Set<CartItem> cartItems = purchase.getCartItems();
         cartItems.forEach(cartItem -> cartItem.setCart(cart));
 
-        /*  cartItems.forEach(item -> {
-            cart.add(item);
-            item.setCart(cart);
-            item.getExcursions().forEach(excursion -> {
-                excursion.setVacation(item.getVacation());
-                excursion.getCartItems().add(item);
-            });
-        });
+//         cartItems.forEach(item -> {
+//            cart.add(item);
+//            item.setCart(cart);
+//            item.getExcursions().forEach(excursion -> {      <--- commented out for error: Cannot add or update a child row: a foreign key constraint fails
+//                excursion.setVacation(item.getVacation());
+//                excursion.getCartitems().add(item);
+//            });
+//        });
 
-    */
-        // populate customer with cart
+
+//        // populate customer with cart
+//        Customer customer = purchase.getCustomer();
+//        customer.add(cart);
+
+        // Populate cart with customer
         Customer customer = purchase.getCustomer();
-        customer.add(cart);
+        cart.setCustomer(customer);
 
 
         // save to database
