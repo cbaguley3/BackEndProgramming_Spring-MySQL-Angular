@@ -46,6 +46,6 @@ public class Vacation {
     @Column(name="last_update")
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacation")
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
     private Set<Excursion> excursions = new HashSet<>();
 }

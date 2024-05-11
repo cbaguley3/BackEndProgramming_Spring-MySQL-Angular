@@ -21,11 +21,11 @@ import java.util.Set;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cart_item_id", nullable = false, updatable = false, insertable = false)
+    @Column(name="cart_item_id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id", nullable = false, updatable = false)
+    @JoinColumn(name="vacation_id", nullable = false, updatable = false) // <--- fixed for cart_items table population
     private Vacation vacation;
 
     @ManyToOne
@@ -40,7 +40,11 @@ public class CartItem {
     @Column(name="last_update", updatable = false)
     private Date last_update;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartitems")
+    @ManyToMany
+    @JoinTable(
+            name = "excursion_cartitem", // Name of the newly created table
+            joinColumns = @JoinColumn(name = "cart_item_id"), // Primary key column in the first join table
+            inverseJoinColumns = @JoinColumn(name = "excursion_id")) // Primary key column in the second join table//, cascade = CascadeType.ALL) <-- causes warning (vacation property modified but not updated because immutable....
     private Set<Excursion> excursions = new HashSet<>();
 
 }

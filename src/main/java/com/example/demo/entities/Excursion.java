@@ -23,7 +23,7 @@ public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="excursion_id", nullable = false, updatable = false, insertable = false)
+    @Column(name="excursion_id", nullable = false)
     private Long id;
 
     @Column(name="excursion_title")
@@ -44,14 +44,14 @@ public class Excursion {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id", insertable = false, updatable = false)
+    @JoinColumn(name="vacation_id", insertable = false, updatable = false) // <-- corrected for cart_items table population (error: vacation_id cannot be null)
     private Vacation vacation;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL) // <--- keep this here
     @JoinTable(
-            name = "excursion_cartitem", // Name of the join table
-            joinColumns = {@JoinColumn(name = "cart_item_id")}, // Foreign key column in the join table
-            inverseJoinColumns = {@JoinColumn(name = "excursion_id")}) // Foreign key column in the other entity's table
+            name = "excursion_cartitem", // Name of the newly created table
+            joinColumns = @JoinColumn(name = "excursion_id"), // Primary key column in the first join table
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id")) // Primary key column in the second join table
 
     private Set<CartItem> cartitems = new HashSet<>();
 
