@@ -43,16 +43,16 @@ public class Customer {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @CreationTimestamp
     private Date create_date;
 
-    @Column(name = "last_update")
+    @Column(name = "last_update", updatable = false)
     @UpdateTimestamp
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "division_id")
+    @JoinColumn(name = "division_id", updatable = false)  // <--- error: not-null property references a null or transient value : com.example.demo.entities.Customer.division
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")

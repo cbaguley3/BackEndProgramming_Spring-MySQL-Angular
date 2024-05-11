@@ -22,31 +22,26 @@ import java.util.Set;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cart_item_id")
+    @Column(name="cart_item_id", nullable = false, updatable = false, insertable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id")
+    @JoinColumn(name="vacation_id", nullable = false, updatable = false, insertable = false)
     private Vacation vacation;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "excursion_cartitem", // Name of the join table
-            joinColumns = @JoinColumn(name = "excursion_id"), // Foreign key column in the join table
-            inverseJoinColumns = @JoinColumn(name = "cart_item_id") // Foreign key column in the other entity's table
-    )
-    private Set<Excursion> excursions = new HashSet<>();
-
     @ManyToOne
-    @JoinColumn(name="cart_id")
+    @JoinColumn(name="cart_id", nullable = false, updatable = false, insertable = false)
     private Cart cart;
 
     @CreationTimestamp
-    @Column(name="create_date")
+    @Column(name="create_date", updatable = false)
     private Date create_date;
 
     @UpdateTimestamp
-    @Column(name="last_update")
+    @Column(name="last_update", updatable = false)
     private Date last_update;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "cartitems")
+    private Set<Excursion> excursions = new HashSet<>();
 
 }

@@ -24,7 +24,7 @@ public class Vacation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="vacation_id")
+    @Column(name="vacation_id", nullable = false)
     private Long id;
 
     @Column(name="vacation_title")
@@ -48,5 +48,4 @@ public class Vacation {
 
     @OneToMany(mappedBy = "vacation")
     private Set<Excursion> excursions = new HashSet<>();
-
 }

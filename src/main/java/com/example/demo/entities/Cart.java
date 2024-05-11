@@ -55,7 +55,7 @@ public class Cart {
     @JsonProperty("cart_items")
     private Set<CartItem> cartItems = new HashSet<>();
 
-    public void add(CartItem item) {
+    public void addCartItems(CartItem item) {
         if (item != null) {
             if (cartItems == null) {
                 cartItems = new HashSet<>();
@@ -64,11 +64,4 @@ public class Cart {
             item.setCart(this);
         }
     }
-
-    // Enum declaration
-    public enum StatusType {
-        pending,
-        ordered,
-        canceled
-    }
-    }
+}

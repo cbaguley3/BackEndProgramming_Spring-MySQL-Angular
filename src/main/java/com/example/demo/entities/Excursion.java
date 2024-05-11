@@ -23,7 +23,7 @@ public class Excursion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="excursion_id")
+    @Column(name="excursion_id", nullable = false, updatable = false, insertable = false)
     private Long id;
 
     @Column(name="excursion_title")
@@ -44,15 +44,15 @@ public class Excursion {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id")
+    @JoinColumn(name="vacation_id", nullable = false, insertable = false, updatable = false)
     private Vacation vacation;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "excursion_cartitem", // Name of the join table
-            joinColumns = @JoinColumn(name = "cart_item_id"), // Foreign key column in the join table
-            inverseJoinColumns = @JoinColumn(name = "excursion_id") // Foreign key column in the other entity's table
-    )
+            joinColumns = {@JoinColumn(name = "cart_item_id")}, // Foreign key column in the join table
+            inverseJoinColumns = {@JoinColumn(name = "excursion_id")}) // Foreign key column in the other entity's table
+
     private Set<CartItem> cartitems = new HashSet<>();
 
 }

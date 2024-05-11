@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.UUID;
 
-import static com.example.demo.entities.Cart.StatusType.ordered;
+import static com.example.demo.entities.StatusType.ordered;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
@@ -32,44 +32,30 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
-
         Cart cart = purchase.getCart();
-        // set status type to "ordered"
-        cart.setStatus(ordered);
+        Set<CartItem> cartItems = purchase.getCartItems();
 
-        // generate tracking number
+        // Check if cart or cartItems are null or empty
+        if (cart == null || cartItems == null || cartItems.isEmpty()) {
+            return new PurchaseResponse("Cannot place order: Cart or CartItems are null or empty");
+        }
+
+        // Generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
-
-
-        // populate cart with cartItems
-        Set<CartItem> cartItems = purchase.getCartItems();
+        // Populate cart with cartItems
         cartItems.forEach(cartItem -> cartItem.setCart(cart));
-
-//         cartItems.forEach(item -> {
-//            cart.add(item);
-//            item.setCart(cart);
-//            item.getExcursions().forEach(excursion -> {      <--- commented out for error: Cannot add or update a child row: a foreign key constraint fails
-//                excursion.setVacation(item.getVacation());
-//                excursion.getCartitems().add(item);
-//            });
-//        });
-
-
-//        // populate customer with cart
-//        Customer customer = purchase.getCustomer();
-//        customer.add(cart);
 
         // Populate cart with customer
         Customer customer = purchase.getCustomer();
         cart.setCustomer(customer);
 
+        // Set status type to "ordered"
+        cart.setStatus(ordered);
 
-        // save to database
-        customerRepository.save(customer);
+        // Save to database
         cartRepository.save(cart);
-
 
         return new PurchaseResponse(orderTrackingNumber);
     }
