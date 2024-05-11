@@ -52,7 +52,6 @@ public class Cart {
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
-    @JsonProperty("cart_items")
     private Set<CartItem> cartItems = new HashSet<>();
 
     public void addCartItems(CartItem item) {

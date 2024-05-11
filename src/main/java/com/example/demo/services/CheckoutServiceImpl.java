@@ -45,7 +45,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
         // Populate cart with cartItems
-        cartItems.forEach(cartItem -> cartItem.setCart(cart));
+        cartItems.forEach(cartItem -> cart.addCartItems(cartItem));
 
         // Populate cart with customer
         Customer customer = purchase.getCustomer();
@@ -64,6 +64,3 @@ public class CheckoutServiceImpl implements CheckoutService {
         return UUID.randomUUID().toString();
     }
 }
-
-
-

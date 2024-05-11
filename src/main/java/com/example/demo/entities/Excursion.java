@@ -44,7 +44,7 @@ public class Excursion {
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name="vacation_id", insertable = false, updatable = false)
     private Vacation vacation;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -1,6 +1,5 @@
 package com.example.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,11 +25,11 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="vacation_id", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name="vacation_id", nullable = false, updatable = false)
     private Vacation vacation;
 
     @ManyToOne
-    @JoinColumn(name="cart_id", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name="cart_id")
     private Cart cart;
 
     @CreationTimestamp
