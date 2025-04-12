@@ -1,27 +1,72 @@
-<strong> **DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. ** </strong>
-# WESTERN GOVERNOR UNIVERSITY 
-## D288 – BACK-END PROGRAMMING
-Welcome to Back-End Programming! This is an opportunity for students to develop object-oriented applications that can be integrated with relational databases, write code for object-oriented applications using Spring framework, and implements design patterns for object-oriented applications. 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-## BASIC INSTRUCTIONS
-For this project, you will be building your project using IntelliJ IDEA (Ultimate Edition) in a WGU-provided lab environment. You will be working with an existing MySQL database and Angular front-end, which are supplied for you in the lab environment. You will share this project to a private external GitLab repository and backup regularly. If you wish to work on it on your local machine, you will also need to download the Angular front-end application and create your own MySQL database. Use the links on your course page to install the integrated development environments (IDE), MySQL WorkBench, and IntelliJ IDEA, and pull the project from the lab environment.  
+# E-commerce Backend API
 
+## Overview
 
-## SUPPLEMENTAL RESOURCES  
-1.	How to clone a project to IntelliJ using Git?
+This project involves creating a Spring Boot backend API to connect an existing Angular frontend with a MySQL database for an e-commerce website. The backend will handle data retrieval, updates, and the creation of tracking numbers.
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
+## Technologies Used
 
-2. How to create a branch and start Development?
+### Backend
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
+* Java
+* Spring Boot
+* Maven
+* Spring Data JPA
+* RESTful APIs
+* Lombok
 
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
+### Frontend
 
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+* Angular
+* TypeScript
+* HTML
+* CSS
+* Node.js
+* npm
 
+### Database
+
+* MySQL
+
+### Development Environment & Tools
+
+* IntelliJ IDEA
+* Git
+
+## Feature Implementation
+
+### Initial Setup and Environment (Tasks A & B)
+
+* Configured the development environment (local machine or lab).
+* Set up the GitLab repository and IntelliJ project.
+* Installed necessary project dependencies (as per linked guide).
+
+### Backend and Frontend Linking (Tasks C, D, & E)
+
+* Created necessary Java packages (`com.your.groupname.*`, `config`).
+* Imported `RestDataConfig.java` and `application.properties` from lab files.
+* Created Java entity classes mapping to the MySQL database tables, using `@Getter` and `@Setter`.
+* Ensured entity field names match the corresponding variables in the Angular frontend `.ts` model files.
+* Configured OneToMany and ManyToMany relationships between entities based on the provided UML/ERD diagrams.
+* Created an enumeration for the `Cart` status.
+* Created repository interfaces for each entity using Spring Data JPA's `JpaRepository` and added `@CrossOrigin` annotation.
+
+## Setup
+
+1. Ensure IntelliJ IDEA, Java (JDK), and Maven are installed.
+2. Set up the GitLab repository and clone the project into IntelliJ.
+3. Configure project dependencies in `pom.xml` (including specific Spring Boot and Lombok versions if necessary).
+4. The Angular frontend is provided and assumed to be running separately (typically via `ng serve` in its own directory).
+5. The Spring Boot backend can be run within IntelliJ or via Maven (`mvn spring-boot:run`).
+
+## Git Repository
+
+* **Repository URL:** https://github.com/cbaguley3/BackEndProgramming_Spring-MySQL-Angular/edit/working_branch
+* **Branch:** working_branch
+
+## Commit History (Relevant to described features)
+
+* Completed Task B (initial environment setup).
+* Implemented package structure (Task C).
+* Created and mapped entity classes and relationships (Task D).
+* Created repository interfaces (Task E).
